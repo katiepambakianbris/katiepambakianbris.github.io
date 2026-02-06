@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Best Parents</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Inter:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #fde68a, #f472b6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 3rem;
+      border-radius: 28px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+      max-width: 450px;
+      width: 90%;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-family: 'Comic Neue', cursive;
+      font-size: 2.4rem;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 1rem 2.5rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #22c55e, #3b82f6);
+      color: white;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      animation: wiggle 1.2s infinite;
+    }
+
+    button:disabled {
+      animation: none;
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    @keyframes wiggle {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(1deg); }
+      50% { transform: rotate(-1deg); }
+      75% { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .result {
+      margin-top: 2rem;
+      opacity: 0;
+      transform: scale(0.6) rotate(-5deg);
+      transition: all 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+
+    .result.show {
+      opacity: 1;
+      transform: scale(1.1) rotate(0deg);
+    }
+
+    .names {
+      font-family: 'Comic Neue', cursive;
+      font-size: 2.2rem;
+      margin-top: 0.5rem;
+      color: #dc2626;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="confetti"></canvas>
+
+  <div class="card">
+    <h1>Who are the best parents?</h1>
+    <button id="revealBtn">CLICK IF YOU DARE</button>
+
+    <div id="result" class="result">
+      There was never any doubt.
+      <div class="names">Mum & Dad 💖</div>
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("revealBtn");
+    const result = document.getElementById("result");
+
+    btn.addEventListener("click", () => {
+      btn.disabled = true;
+      result.classList.add("show");
+      launchConfetti();
+    });
+
+    // ---- CONFETTI ENGINE ----
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let pieces = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function launchConfetti() {
+      for (let i = 0; i < 250; i++) {
+        pieces.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * -canvas.height,
+          size: Math.random() * 8 + 4,
+          speed: Math.random() * 6 + 3,
+          color: `hsl(${Math.random() * 360}, 100%, 60%)`,
+          rotation: Math.random() * 360
+        });
+      }
+      requestAnimationFrame(update);
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(p => {
+        p.y += p.speed;
+        p.rotation += 5;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        ctx.restore();
+      });
+
+      pieces = pieces.filter(p => p.y < canvas.height + 50);
+      if (pieces.length > 0) requestAnimationFrame(update);
+    }
+  </script>
+
+</body>
+</html>
