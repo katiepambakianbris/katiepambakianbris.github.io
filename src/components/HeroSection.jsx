@@ -18,7 +18,7 @@ export const HeroSection = () => {
                         </span>
                     </h1>
                     <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
-                        I am currently in my final year studying BSc Computer Science at the University of Bristol, preparing for graduate and PhD study. 
+                        I am currently in my final year studying BSc Computer Science at the University of Bristol. 
                     </p>
                     <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
                         I'm currently upgrading my website, check back later to find out more!
