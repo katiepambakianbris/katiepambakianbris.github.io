@@ -20,12 +20,14 @@ export const HeroSection = () => {
                     <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
                         I am currently in my final year studying BSc Computer Science at the University of Bristol, preparing for graduate and PhD study. 
                     </p>
-
-                    <div>
+                    <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
+                        I'm currently upgrading my website, check back later to find out more!
+                    </p>
+                    {/* <div>
                         <a href="#projects" className="cosmic-button opacity-0 animate-fade-in-delay-4">
-                            Find out more
+                            
                         </a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

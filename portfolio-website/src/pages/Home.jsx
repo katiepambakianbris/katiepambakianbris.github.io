@@ -22,10 +22,10 @@ export const Home = () => {
             {/* Main Content */}
             <main>
                 <HeroSection />
-                <AboutSection />
-                <ProjectSection />
+                {/* <AboutSection /> */}
+                {/* <ProjectSection /> */}
                 {/* <UpTo /> */}
-                <ContactSection />
+                {/* <ContactSection /> */}
             </main>
 
             {/* Footer */}
